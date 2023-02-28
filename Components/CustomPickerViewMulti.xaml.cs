@@ -10,7 +10,7 @@ public partial class CustomPickerViewMulti : ContentPage
     private readonly EventHandler eventHandler;
     private readonly dynamic Picker;
     private ObservableCollection<CustomPickerDto> customItemsource;
-    public CustomPickerViewMulti(dynamic Picker, string ID, string title, IEnumerable<Class.CustomPickerDto> itemsource, DataTemplate dataTemplate, EventHandler eventHandler, EventHandler eventHandlerAddNew, IEnumerable<Class.CustomPickerDto> selectedItems, bool IsAddNewVisible = false)
+    public CustomPickerViewMulti(dynamic Picker, string ID, string title, IEnumerable<Classes.CustomPickerDto> itemsource, DataTemplate dataTemplate, EventHandler eventHandler, EventHandler eventHandlerAddNew, IEnumerable<Classes.CustomPickerDto> selectedItems, bool IsAddNewVisible = false)
     {
         InitializeComponent();
 
@@ -153,13 +153,13 @@ public partial class CustomPickerViewMulti : ContentPage
 
     private async void BtnSaveList_Clicked(object sender, EventArgs e)
     {
-        var result = customItemsource.Where(x => x.IsSelected).Select(x => new Class.CustomPickerDto
+        var result = customItemsource.Where(x => x.IsSelected).Select(x => new Classes.CustomPickerDto
         {
             ID = x.ID,
             Name = x.Name,
         }).ToList();
 
-        MessagingCenter.Send<Page, List<Class.CustomPickerDto>>(this, ID, result);
+        MessagingCenter.Send<Page, List<Classes.CustomPickerDto>>(this, ID, result);
         await Task.Delay(50);
         await FireEvent();
         Navigation.PopModalAsync();

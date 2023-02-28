@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Barkerbg001.Maui.Controls.Components;
-public class CustomAbsoluteLayout : AbsoluteLayout
+public class CustomLabel : Label
 {
-    public CustomAbsoluteLayout()
+    public CustomLabel()
     {
         GestureRecognizers.Add(TapGestureRecognizer = new TapGestureRecognizer());
     }

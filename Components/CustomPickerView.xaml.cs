@@ -7,8 +7,8 @@ public partial class CustomPickerView : ContentPage
     private readonly string ID;
     private readonly EventHandler eventHandler;
     private readonly dynamic Picker;
-    private IEnumerable<Class.CustomPickerDto> customItemsource;
-    public CustomPickerView(dynamic Picker, string ID, string title, IEnumerable<Class.CustomPickerDto> itemsource, DataTemplate dataTemplate, EventHandler eventHandler, EventHandler eventHandlerAddNew, bool IsAddNewVisible = false)
+    private IEnumerable<Classes.CustomPickerDto> customItemsource;
+    public CustomPickerView(dynamic Picker, string ID, string title, IEnumerable<Classes.CustomPickerDto> itemsource, DataTemplate dataTemplate, EventHandler eventHandler, EventHandler eventHandlerAddNew, bool IsAddNewVisible = false)
     {
         InitializeComponent();
 
@@ -62,8 +62,8 @@ public partial class CustomPickerView : ContentPage
 
     private async void lvContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var item = (Class.CustomPickerDto)((CollectionView)sender)?.SelectedItem;
-        MessagingCenter.Send<Page, Class.CustomPickerDto>(this, ID, item);
+        var item = (Classes.CustomPickerDto)((CollectionView)sender)?.SelectedItem;
+        MessagingCenter.Send<Page, Classes.CustomPickerDto>(this, ID, item);
         await Task.Delay(50);
         await FireEvent();
         Navigation.PopModalAsync();

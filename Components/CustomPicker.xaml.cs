@@ -7,13 +7,13 @@ public partial class CustomPicker : ContentView
 	public CustomPicker()
 	{
         InitializeComponent();
-        MessagingCenter.Subscribe<Page, List<Class.CustomPickerDto>>(this, this.Id.ToString(), (p, value) =>
+        MessagingCenter.Subscribe<Page, List<Classes.CustomPickerDto>>(this, this.Id.ToString(), (p, value) =>
         {
             Text = value.Count + " Selected";
             SelectedItems = value;
         });
 
-        MessagingCenter.Subscribe<Page, Class.CustomPickerDto>(this, this.Id.ToString(), (p, value) =>
+        MessagingCenter.Subscribe<Page, Classes.CustomPickerDto>(this, this.Id.ToString(), (p, value) =>
         {
             Text = value.Name;
             SelectedItem = value;
@@ -36,10 +36,10 @@ public partial class CustomPicker : ContentView
         set => SetValue(TextProperty, value);
     }
 
-    public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(Class.CustomPickerDto), typeof(CustomPicker), null, BindingMode.TwoWay, propertyChanged: SelectedItemPropertyChanged);
-    public Class.CustomPickerDto SelectedItem
+    public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(Classes.CustomPickerDto), typeof(CustomPicker), null, BindingMode.TwoWay, propertyChanged: SelectedItemPropertyChanged);
+    public Classes.CustomPickerDto SelectedItem
     {
-        get => (Class.CustomPickerDto)GetValue(SelectedItemProperty);
+        get => (Classes.CustomPickerDto)GetValue(SelectedItemProperty);
         set => SetValue(SelectedItemProperty, value);
     }
 
@@ -47,14 +47,14 @@ public partial class CustomPicker : ContentView
     {
         if (bindable is CustomPicker current)
         {
-            current.Text = newvalue != null ? ((Class.CustomPickerDto)newvalue).Name : string.Empty;
+            current.Text = newvalue != null ? ((Classes.CustomPickerDto)newvalue).Name : string.Empty;
         }
     }
 
-    public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create(nameof(SelectedItems), typeof(List<Class.CustomPickerDto>), typeof(CustomPicker), null, BindingMode.TwoWay, propertyChanged: SelectedItemsPropertyChanged);
-    public List<Class.CustomPickerDto> SelectedItems
+    public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create(nameof(SelectedItems), typeof(List<Classes.CustomPickerDto>), typeof(CustomPicker), null, BindingMode.TwoWay, propertyChanged: SelectedItemsPropertyChanged);
+    public List<Classes.CustomPickerDto> SelectedItems
     {
-        get => (List<Class.CustomPickerDto>)GetValue(SelectedItemsProperty);
+        get => (List<Classes.CustomPickerDto>)GetValue(SelectedItemsProperty);
         set => SetValue(SelectedItemsProperty, value);
     }
 
@@ -62,7 +62,7 @@ public partial class CustomPicker : ContentView
     {
         if (bindable is CustomPicker current)
         {
-            current.Text = newvalue != null ? ((List<Class.CustomPickerDto>)newvalue).Count() + " Selected" : "0 Selected";
+            current.Text = newvalue != null ? ((List<Classes.CustomPickerDto>)newvalue).Count() + " Selected" : "0 Selected";
         }
     }
 
@@ -165,11 +165,11 @@ public partial class CustomPicker : ContentView
         set => SetValue(FontSizeProperty, value);
     }
 
-    public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable<Class.CustomPickerDto>), typeof(CustomPicker), defaultValue: null, BindingMode.TwoWay, propertyChanged: (bindable, oldValue, newValue) =>
+    public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable<Classes.CustomPickerDto>), typeof(CustomPicker), defaultValue: null, BindingMode.TwoWay, propertyChanged: (bindable, oldValue, newValue) =>
     {
         if (bindable is CustomPicker current)
         {
-            var value = (IEnumerable<Class.CustomPickerDto>)newValue;
+            var value = (IEnumerable<Classes.CustomPickerDto>)newValue;
             var check = value.FirstOrDefault(x => x.IsDefault == true);
             if (check != null)
             {
@@ -178,9 +178,9 @@ public partial class CustomPicker : ContentView
         }
     });
 
-    public IEnumerable<Class.CustomPickerDto> ItemsSource
+    public IEnumerable<Classes.CustomPickerDto> ItemsSource
     {
-        get => (IEnumerable<Class.CustomPickerDto>)GetValue(ItemsSourceProperty);
+        get => (IEnumerable<Classes.CustomPickerDto>)GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
     }
 

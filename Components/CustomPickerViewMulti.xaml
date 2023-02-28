@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Barkerbg001.Maui.Controls.Components.CustomPickerViewMulti"
              xmlns:Barkerbg001="clr-namespace:Barkerbg001.Maui.Controls.Components"
+             xmlns:Converter="clr-namespace:Barkerbg001.Maui.Controls.Converter"
              Title="CustomPickerViewMulti"
              BackgroundColor="Transparent">
     <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converter:ImageConverter x:Key="ImageConverter" ImageChosen="checkyes.png" ImageUnchosen="checkno.png" />
+        </ResourceDictionary>
         <DataTemplate x:Name="MainListViewTemplate" x:Key="ListViewTemplate">
             <StackLayout Orientation="Vertical" BackgroundColor="White">
                 <StackLayout Orientation="Horizontal">
