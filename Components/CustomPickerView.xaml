@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barkerbg001.Maui.Controls.Components.CustomPickerView"
+             xmlns:Barkerbg001="clr-namespace:Barkerbg001.Maui.Controls.Components"
+             Title="CustomPickerView"
+             BackgroundColor="#80000000">
+    <ContentPage.Resources>
+        <DataTemplate x:Name="MainListViewTemplate" x:Key="ListViewTemplate">
+            <Grid Padding="5" BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="greenDot.png" HeightRequest="5" Grid.Column="0" Grid.Row="0" />
+                <Label Text="{Binding ID}" Grid.Column="1" Grid.Row="0" IsVisible="false" />
+                <Label FontSize="15" Text="{Binding Name}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" LineBreakMode="WordWrap" Grid.Column="2" Grid.Row="0" TextColor="#323232" />
+                <BoxView HeightRequest="1" VerticalOptions="End" BackgroundColor="#E9E9E9" HorizontalOptions="Fill" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" />
+            </Grid>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Barkerbg001:CustomStackLayout BackgroundColor="#80000000" Opacity="0.5" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Tapped="BtnCancelList_Clicked" />
+            <Frame x:Name="Main" CornerRadius="20" AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label x:Name="lblSelectedField" Text="" WidthRequest="200" FontSize="15" HeightRequest="25" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" />
+                    <Grid HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <SearchBar Grid.Row="0" x:Name="scrSearch" TextChanged="scrSearch_TextChanged" IsSpellCheckEnabled="True" />
+                        <CollectionView Grid.Row="1" x:Name="lvContent" Margin="10" BackgroundColor="White" SelectionMode="Single" SelectionChanged="lvContent_SelectionChanged" />
+                    </Grid>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+                        <Button Text="Cancel" x:Name="BtnCancelList" Clicked="BtnCancelList_Clicked" Style="{StaticResource btnCancel}"/>
+                        <StackLayout HorizontalOptions="CenterAndExpand" />
+                        <Button Text="Add" x:Name="btnAddNew" Style="{StaticResource btnSave}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

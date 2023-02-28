@@ -1,0 +1,23 @@
+﻿<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Controls.Barkerbg001</id>
+    <version>1.0.2</version>
+    <title>Barkerbg001 Controls</title>
+    <owners>Barkerbg001</owners>
+    <author>Barkerbg001</author>
+    <tags>custom control, Xamarin, Forms, UI</tags>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Xamarin Custom Controls</description>
+    <dependencies>
+      <!-- Xamarin.Forms dependency -->
+      <dependency id="Xamarin.Forms" version="5.0.0.2401" />
+    </dependencies>
+  </metadata>
+  <!-- files and directories included in the package -->
+  <files>
+    <file src="CustomStackLayout.cs" target="lib/netstandard2.0"/>
+  </files>
+  <contentFiles>
+    <files include="README.md" buildAction="Content" />
+  </contentFiles>
+</package>

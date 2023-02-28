@@ -1,0 +1,5 @@
+dotnet pack -c Release -p:PackageVersion=1.0.6
+dotnet pack --configuration Release
+dotnet pack -c Release
+
+https://github.com/enisn/Xamarin.Forms.InputKit
