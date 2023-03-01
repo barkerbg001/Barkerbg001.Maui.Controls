@@ -7,13 +7,13 @@
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <PackageId>Barkerbg001.Maui.Controls</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
 
     <!-- NuGet Package Info -->
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/barkerbg001/Barkerbg001.Maui.Controls</PackageProjectUrl>
     <RepositoryUrl>https://github.com/barkerbg001/Barkerbg001.Maui.Controls</RepositoryUrl>
-    <PackageReleaseNotes>First Stuff Added.</PackageReleaseNotes>
+    <PackageReleaseNotes>Testing</PackageReleaseNotes>
     <PackageTags>xamarin, maui, windows, ios, android, xamarin.forms, plugin, Barkerbg001.Controls, picker, datepicker</PackageTags>
     <Title>Common controls mostly required</Title>
     <Summary>Picker, Datepicker included this package </Summary>
@@ -43,7 +43,7 @@
   <PropertyGroup>
     <NoWarn>1701;1702,CS1591</NoWarn>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="Shared\Resources\**\*.*" />
   </ItemGroup>
@@ -52,9 +52,13 @@
     <Folder Include="Classes\" />
     <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="37418113.jpg" Pack="true" PackagePath="\" />
-    <None Include="Converter\ImageConverter.cs"/>
+    <None Include="Converter\ImageConverter.cs" />
     <None Include="Components\CustomAbsoluteLayout.cs" />
     <None Include="Components\CustomStackLayout.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

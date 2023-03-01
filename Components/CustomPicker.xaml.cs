@@ -1,11 +1,10 @@
-using static System.Net.Mime.MediaTypeNames;
-
+using CommunityToolkit.Maui.Views;
 namespace Barkerbg001.Maui.Controls.Components;
 
 public partial class CustomPicker : ContentView
 {
-	public CustomPicker()
-	{
+    public CustomPicker()
+    {
         InitializeComponent();
         MessagingCenter.Subscribe<Page, List<Classes.CustomPickerDto>>(this, this.Id.ToString(), (p, value) =>
         {
@@ -19,7 +18,6 @@ public partial class CustomPicker : ContentView
             SelectedItem = value;
         });
         edtInput.GestureRecognizers.Add(TapGestureRecognizer = new TapGestureRecognizer());
-        this.HorizontalOptions = LayoutOptions.FillAndExpand;
     }
 
     public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(String), typeof(CustomPicker), default(String), BindingMode.TwoWay, propertyChanged: OnTextPropertyChanged);
@@ -74,6 +72,9 @@ public partial class CustomPicker : ContentView
         set => SetValue(TitleProperty, value);
     }
 
+    /// <summary>
+    /// bool to determine if the picker is a multiple selection
+    /// </summary>
     public static readonly BindableProperty MultipleProperty = BindableProperty.Create(nameof(Multiple), typeof(bool), typeof(CustomPicker), false, BindingMode.TwoWay);
     public bool Multiple
     {
@@ -229,17 +230,51 @@ public partial class CustomPicker : ContentView
 
     private async void CustomLabel_Tapped(object sender, TappedEventArgs e)
     {
-        if (ItemsSource != null)
+        //try
+        //{
+        //    if (ItemsSource != null)
+        //    {
+        //        var items = IsOrdered ? ItemsSource.OrderBy(x => x.Name) : ItemsSource;
+        //        if (Multiple)
+        //        {
+        //            await Navigation.PushModalAsync(new CustomPickerViewMulti(this, this.Id.ToString(), Title, ItemsSource, DataTemplate, EnterClicked, AddNew_Clicked, SelectedItems, IsAddNewVisible));
+        //        }
+        //        else
+        //        {
+        //            await Navigation.PushModalAsync(new CustomPickerView(this, this.Id.ToString(), Title, ItemsSource, DataTemplate, EnterClicked, AddNew_Clicked, IsAddNewVisible));
+        //        }
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    edtInput.Text = ex.Message;
+        //}
+
+        var popup = new Popup();
+        popup.Content = new StackLayout
         {
-            var items = IsOrdered ? ItemsSource.OrderBy(x => x.Name) : ItemsSource;
-            if (Multiple)
+            Children =
             {
-                await Navigation.PushModalAsync(new CustomPickerViewMulti(this, this.Id.ToString(), Title, ItemsSource, DataTemplate, EnterClicked, AddNew_Clicked, SelectedItems, IsAddNewVisible));
+                new Label { Text = "Hello World!" },
+                new Button { Text = "Close", Command = new Command(() => popup.Close()) }
+            }
+        };
+        //Get the current page this control is on
+        bool loop = true;
+        var p = Parent;
+        do
+        {
+            if (p.GetType().Name.Contains("Page"))
+            {
+                loop = false;
             }
             else
             {
-                await Navigation.PushModalAsync(new CustomPickerView(this, this.Id.ToString(), Title, ItemsSource, DataTemplate, EnterClicked, AddNew_Clicked, IsAddNewVisible));
+                p = p.Parent;
             }
-        }
+        } while (loop);
+        var page = (Page)p;
+
+        await PopupExtensions.ShowPopupAsync(page, popup);
     }
 }
