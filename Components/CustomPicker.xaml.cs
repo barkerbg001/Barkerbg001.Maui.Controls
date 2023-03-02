@@ -249,16 +249,38 @@ public partial class CustomPicker : ContentView
         //{
         //    edtInput.Text = ex.Message;
         //}
-
-        var popup = new Popup();
-        popup.Content = new StackLayout
+        var lblTitle = new Label
         {
+            WidthRequest = 200,
+            FontSize = 15,
+            HeightRequest = 25,
+            HorizontalTextAlignment = TextAlignment.Center,
+            HorizontalOptions = LayoutOptions.Center,
+            VerticalOptions = LayoutOptions.Start,
+            Text = Title
+        };
+        var stacklayout = new VerticalStackLayout
+        {
+            HorizontalOptions = LayoutOptions.Fill,
+            VerticalOptions = LayoutOptions.Fill,
             Children =
             {
-                new Label { Text = "Hello World!" },
-                new Button { Text = "Close", Command = new Command(() => popup.Close()) }
+                lblTitle
             }
         };
+        var frame = new Frame
+        {
+            CornerRadius = 20,
+            Content = new VerticalStackLayout { stacklayout }
+        };
+
+
+        var popup = new Popup
+        {
+            Color = Color.FromArgb("#80000000"),
+            Content = frame
+        };
+
         //Get the current page this control is on
         bool loop = true;
         var p = Parent;
