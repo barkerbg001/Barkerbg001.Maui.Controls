@@ -7,7 +7,7 @@
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <PackageId>Barkerbg001.Maui.Controls</PackageId>
-    <Version>1.0.6</Version>
+    <Version>1.0.14</Version>
 
     <!-- NuGet Package Info -->
     <PackageLicenseUrl></PackageLicenseUrl>

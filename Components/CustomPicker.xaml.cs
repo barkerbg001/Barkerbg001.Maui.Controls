@@ -249,6 +249,27 @@ public partial class CustomPicker : ContentView
         //{
         //    edtInput.Text = ex.Message;
         //}
+
+        // Create a new PopupPage
+
+        var datatem = new DataTemplate(() =>
+        {
+            var lbl = new Label
+            {
+                FontSize = 15,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalTextAlignment = TextAlignment.Start,
+                VerticalTextAlignment = TextAlignment.Center,
+                TextColor = Colors.Black,
+                Margin = new Thickness(10, 0, 0, 0)
+            };
+            lbl.SetBinding(Label.TextProperty, "Name");
+            return lbl;
+        });
+        
+        var popup = new Popup { Color = Colors.Transparent };
+
         var lblTitle = new Label
         {
             WidthRequest = 200,
@@ -259,27 +280,25 @@ public partial class CustomPicker : ContentView
             VerticalOptions = LayoutOptions.Start,
             Text = Title
         };
-        var stacklayout = new VerticalStackLayout
-        {
-            HorizontalOptions = LayoutOptions.Fill,
-            VerticalOptions = LayoutOptions.Fill,
-            Children =
-            {
-                lblTitle
-            }
-        };
-        var frame = new Frame
-        {
-            CornerRadius = 20,
-            Content = new VerticalStackLayout { stacklayout }
-        };
 
-
-        var popup = new Popup
+        var btnCancel = new Button { Text = "Cancel", HorizontalOptions = LayoutOptions.Start };
+        btnCancel.Clicked += delegate (object senders, EventArgs ed)
         {
-            Color = Color.FromArgb("#80000000"),
-            Content = frame
+            popup.Close();
         };
+        var btnAdd = new Button { Text = "Add", IsVisible = IsAddNewVisible, HorizontalOptions = LayoutOptions.End };
+        btnAdd.Clicked += AddNew_Clicked;
+
+        //Create grid for the popup that will hold the content
+        var grdMiddle = new Grid { HorizontalOptions = LayoutOptions.Fill, VerticalOptions = LayoutOptions.FillAndExpand };
+        grdMiddle.AddRowDefinition(new RowDefinition { Height = 45 });
+        grdMiddle.AddRowDefinition(new RowDefinition { Height = GridLength.Star });
+        grdMiddle.AddRowDefinition(new RowDefinition { Height = 45 });
+        grdMiddle.Add(new SearchBar { HorizontalOptions = LayoutOptions.Fill, VerticalOptions = LayoutOptions.Start, Placeholder = "Search", IsSpellCheckEnabled = true }, 0, 0);
+        grdMiddle.Add(new CollectionView { ItemTemplate = datatem, ItemsSource = ItemsSource }, 0, 1);
+        grdMiddle.Add(new HorizontalStackLayout { HorizontalOptions = LayoutOptions.Fill, VerticalOptions = LayoutOptions.End, Children = { btnCancel, btnAdd } }, 0, 2);
+
+        popup.Content = new Frame {  CornerRadius = 20, Content = new VerticalStackLayout { HorizontalOptions = LayoutOptions.Fill, VerticalOptions = LayoutOptions.Fill, Children = { lblTitle, grdMiddle } } };
 
         //Get the current page this control is on
         bool loop = true;
